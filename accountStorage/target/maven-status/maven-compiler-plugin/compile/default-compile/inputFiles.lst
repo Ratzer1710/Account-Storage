@@ -1,0 +1,15 @@
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\configuration\SpringSecurity.java
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\repository\AccountRepository.java
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\servicesImpl\UserServiceImpl.java
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\repository\UserRepository.java
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\services\UserService.java
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\model\Account.java
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\model\User.java
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\services\AccountService.java
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\controllers\MainController.java
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\AccountStorageApplication.java
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\configuration\UserRole.java
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\configuration\WebPages.java
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\security\CustomUserDetailsService.java
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\servicesImpl\AccountServiceImpl.java
+C:\Users\ADMIN\Test\accountStorage\src\main\java\com\ratzer\accountStorage\model\UserDto.java

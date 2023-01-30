@@ -1,0 +1,348 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cooltipz-css@2.2.0/cooltipz.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="sweetalert2.all.min.js"></script>
+    <title>Account Storage</title>
+</head>
+<body>
+    <div class="new-account-form" id="popup">
+        <button onclick="newAccount()" class="close-frm">✖</button>
+        <div class="row g-6">
+            <h1>Add your Account</h1>
+        </div>
+        <form th:action="@{/index/newAccount}" method="post" th:object="${newAccount}">
+            <div class="input-group mb-3">
+                <div class="mb-3 form-floating">
+                    <input required type="text" th:field="*{service}" class="form-control shadow-none" id="service"name="service" placeholder="Service">    
+                    <label for="service">Service</label>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <div class="mb-3 form-floating">
+                    <input type="text" th:field="*{username}" class="form-control shadow-none" id="username"name="username" placeholder="Username">    
+                    <label for="username">Username</label>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                <div class="mb-3 form-floating">
+                    <input type="text" th:field="*{email}" class="form-control shadow-none" id="email"name="email" placeholder="Email">    
+                    <label for="email">Email</label>
+                </div>
+            </div>
+            <div class="input-group mb-3">
+                  <div class="form-floating">
+                      <input type="password" class="form-control shadow-none" id="password" placeholder="Password" th:field="*{password}"  name="password">
+                      <label for="pasword">Password</label>
+                  </div>
+            </div>
+            <input type="text" th:value="${currUser}" name="user" id="user" style="display: none;">
+            <button type="submit" class="btn btn-primary">Add Account</button>
+          </form>   
+    </div>
+    <main id="main">
+        <header id="header">
+        	<p th:text="${role}" id="role"></p>
+            <p th:text="${currUser}" id="currUsername"></p>
+            <a th:href="@{/users}" id="goHome" data-cooltipz-dir="right" aria-label="Manage registered accounts"><i class="fa fa-users-cog"></i></a>
+            <h1>Account Storage</h1>
+            <a th:href="@{/logout}"  data-cooltipz-dir="left" aria-label="Logout"><i class="fas fa-sign-out-alt"></i></a>
+        </header>
+        <button class="fa fa-plus-square new-btn" onclick="newAccount()" id="newBtn"> &nbsp; <p>Add new account</p></button>
+        <div class="table-div">
+            <table class="table table-light table-hover" id="table">
+                <thead>
+                    <tr class="trow">
+                        <th>#</th>
+                        <th>Service</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Password</th>
+                        <th style="text-align: center;">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr th:each="account : ${accounts}" class="trow">
+                        <th scope="row"></th>
+                        <td th:text="${account.service}" class="account_data"></td>
+                        <td th:text="${account.username}" class="account_data"></td>
+                        <td th:text="${account.email}" class="account_data"></td>
+                        <td th:text="${account.password}" class="account_data"></td>
+                        <td style="text-align: center;"><a th:href="@{/index/delete(id=${account.id})}" class="acc_del">❌</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="pop-alert hidden" id="pop-alert">
+            <p id="pop-msg"></p>
+        </div>
+    </main>
+    <button id="btn-dark" class="fa fa-moon"></button>
+    <style>
+        #main {
+            transition: all 0.3s;
+        }
+        #main.active {
+            filter: blur(20px);
+            pointer-events: none;
+            user-select: none;
+        }
+        body.dark{background: #121212;}
+        header {
+            display: flex;
+            justify-content: space-between;
+            padding: 2.5%;
+            padding-top: 1%;
+        }
+        .new-btn {
+            margin-top: 3%;
+            margin-left: 10%;
+            border: none;
+            background: none;
+            display: inline-flex;
+            font-size: 1.5rem;
+        }
+        .new-btn:hover {
+            color: #009605;
+        }
+        .new-btn p {
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: 500;
+        }
+        .new-btn p:hover, .new-btn:hover p{
+            text-decoration: underline;
+        }
+        .empty-table {
+            position: fixed;
+            margin: 0;
+            top: 40%;
+            left: 50%;
+            transform: translate(-50%, 40%);
+            font-size: 3rem;
+        }
+        .close-frm {
+            position: absolute;
+            top: 1.5%;
+            right: 1.5%;
+            font-size: 1.5rem;
+            border: none;
+            background: none;
+            font-weight: 700;
+            color: #000;
+        }
+        .close-frm:hover{
+            color: #b81111;
+        }
+        .new-account-form {
+            position: fixed;
+            top: 30%;
+            left: 50%;
+            width: 60%;
+            transform: translate(-50%, -30%);
+            padding: 5%;
+            background: #fff;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.30);
+            visibility: hidden;
+            opacity: 0;
+            transition: all 0.5s;
+            z-index: 1;
+        }
+        #popup.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .row {
+            margin: none;
+            margin-bottom: 5%;
+        }
+        .new-account-form h1 {text-align: center;}
+        #service, #username, #email, #password {
+            background: none;
+            outline: none;
+            border: none;
+            border-radius: 0;
+            border-bottom: 2px solid #666;
+        }
+        #service:focus, #username:focus, #email:focus, #password:focus {
+            background: none;
+            border: none;
+            border-radius: 0;
+            border-bottom: 2px solid #000;
+        }          
+        .btn-primary {
+            margin-top: 7%;
+            outline: none;
+            padding: 0.75rem;
+        }
+        header a {
+            color: #000;
+            font-size: 2.5rem;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        header a:hover {color: #434343;}
+        .table-div{
+			width: 80%;
+			margin: 10%;
+			margin-top: 0;
+		}
+		.table {border: 3px solid #000; font-size: 1.25rem;}
+		.pop-alert {
+			text-align: center;
+			display: block;
+			color: #ffffff;
+			background: rgba(0, 0, 0, 0.7);
+			padding: 1.25rem;
+			margin: 1rem;
+			border-radius: 12px;
+			box-shadow: 0 10px 15px rgba(0, 0, 0, 0.65);
+			backdrop-filter: blur(4px);
+			position: absolute;
+			bottom: 2%;
+			left: 1%;
+			font-size: 1rem;
+		}
+		td a {
+            color: #000;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+		}
+        td a:hover {color: #ff2525;}
+        #btn-dark {
+        	position: absolute;
+        	bottom: 5%;
+        	right: 3%;
+        	padding: 1%;
+        	border-radius: 50%;
+        	font-size: 2.5rem;
+        	border: 2px solid #000;
+        	background: #000;
+        	color: #fff;
+        	transition: all 300ms;
+        	cursor: pointer;
+        }
+        #btn-dark:hover {background: #ccc; color: #000;}
+        body.dark #btn-dark{
+        	border: 2px solid #fff;
+        	background: #fff;
+        	color: #000;
+        }
+        body.dark #btn-dark:hover{background: #323232; color: #F2C800;}
+        body.dark h1,  body.dark header a{color: #fff;}
+        body.dark header a:hover {color: #bbb;}
+        body.dark .close-frm{color: #fff;}
+        body.dark .new-btn{color: #fff;}
+        body.dark #currUsername{color: #fff;}
+        body.dark .table {border-color: #fff;}
+        body.dark .pop-alert {background: rgba(250, 250, 250, 0.7); box-shadow: 0 10px 15px rgba(250, 250, 250, 0.65); color: #000;}
+        body.dark td a{color: #fff;}
+        body.dark .new-account-form {background: #212121; box-shadow: 0 5px 30px rgba(250, 250, 250, 0.30);}
+        body.dark form label {color: #ccc;}
+        body.dark #service, body.dark #username, body.dark #email, body.dark #password {color: #eee; border-bottom: 2px solid #aaa;}
+        body.dark #service:focus, body.dark #username:focus, body.dark #email:focus, body.dark #password:focus {color: #eee; background: none; border-bottom: 2px solid #fff;}
+        body.dark .btn-primary{color: #fff; background: #4f555a; border: none;}
+        body.dark .btn-primary:hover{background-color: #121212; border: none;}
+        .hidden {display: none;}
+    </style>
+    <script>
+        //dark mode switch btn
+        const btn_dark = document.getElementById('btn-dark');
+        const table = document.getElementById('table');
+        btn_dark.addEventListener('click', ()=>{
+        	document.body.classList.toggle('dark');
+            table.classList.toggle('table-dark');
+            table.classList.toggle('table-light');
+        	btn_dark.classList.toggle('fa-sun');
+        	btn_dark.classList.toggle('fa-moon');
+        });
+        //table row enumerate
+    	var rows = table.getElementsByTagName('tr');
+    	for (var i = 1, len = rows.length; i < len; i++) {
+        	rows[i].children[0].innerHTML = i;
+    	}
+        //pop_alert
+        const pop_alert = document.getElementById('pop-alert');
+		const pop_msg = document.getElementById('pop-msg');
+		function popAlert(msg) {
+			pop_msg.innerHTML = msg;
+			pop_alert.classList.remove('hidden');
+			document.addEventListener('mouseup', (e)=>{
+				if (!pop_alert.contains(e.target) && !pop_alert.classList.contains('hidden')) {
+						pop_alert.classList.add('hidden');
+				}
+			});
+		}
+        //copy text to clipboard
+        var account_data = document.getElementsByClassName('account_data');
+		for (var i = 0; i < account_data.length; i++) {
+			account_data[i].addEventListener("click", function() {
+				if (this.innerHTML !== ""){
+					document.execCommand("copy");
+					this.addEventListener('copy', function(e){
+						e.preventDefault();
+						if (e.clipboardData) {
+							e.clipboardData.setData("text/plain", this.innerHTML);
+						}
+					})
+					popAlert('Copied text to clipboard');
+                	setTimeout(function(){
+	                    pop_alert.classList.add('hidden');
+                	}, 4000);
+				}
+			});
+		}
+        //alert delete account
+        var acc_del = document.getElementsByClassName('acc_del');
+        for (var i = 0; i < acc_del.length; i++) {
+			acc_del[i].addEventListener("click", function(e) {
+				if (!this.classList.contains('ready')) {
+					e.preventDefault();
+					Swal.fire({
+					  	title: "Are you sure you want to remove this account?",
+				  		icon: 'warning',
+				  		showCancelButton: true,
+				  		confirmButtonColor: '#3085d6',
+				  		cancelButtonColor: '#d33',
+				  		confirmButtonText: "I'm sure"
+					}).then((result) => {
+					  	if (result.isConfirmed) {
+					  		this.classList.add('ready');
+	                        this.click();
+				 		}
+					})
+				}
+			});
+		}
+        //modal new account window
+        function newAccount() {
+            var bg = document.getElementById('main');
+            bg.classList.toggle('active');
+            var popup = document.getElementById('popup');
+            popup.classList.toggle('active');
+        }
+        //window onload functions
+    	const header = document.getElementById('header');
+    	const role = document.getElementById('role');
+    	const userTxt = document.getElementById('currUsername');
+    	const goHome = document.getElementById('goHome');
+        window.onload = function(){
+            if (document.getElementById("table").rows.length < 2) {
+                document.getElementById('table').style.display = "none";
+                document.getElementById('newBtn').classList.add('empty-table');
+            }
+            if (role.innerHTML == "ADMIN") {
+            	userTxt.remove();
+            } else {
+            	goHome.remove();
+            }
+            role.remove();
+        }
+    </script>
+</body>
+</html>

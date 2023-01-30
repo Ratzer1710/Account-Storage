@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cooltipz-css@2.2.0/cooltipz.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="sweetalert2.all.min.js"></script>
+    <title>Users</title>
+</head>
+<body>
+	<header>
+        <a th:href="@{/index}"  id="goHome" data-cooltipz-dir="right" aria-label="Return to main page"><i class="fa fa-home"></i></a>
+        <a th:href="@{/logout}" id="logout" data-cooltipz-dir="left" aria-label="Logout"><i class="fas fa-sign-out-alt"></i></a>
+	</header>
+	
+	<div class="table-div">
+		<h1 style="text-align: center; margin-bottom: 5%;">Registered Accounts</h1>
+		<table class="table table-light align-middle table-hover" id="table">
+			<thead>
+				<tr class="trow">
+					<th>#</th>
+					<th>Username</th>
+					<th>Role</th>
+					<th style="text-align: center;">Action</th>
+				</tr>
+			</thead>
+			<tbody class="table-group-divider">
+				<tr th:each="user : ${users}" class="trow">
+					<th th:text="${user.id}" scope="row"></th>
+					<td th:text="${user.username}" class="user_info"></td>
+					<td th:text="${user.userRole}" class="user_info"></td>
+					<td class="text-center">
+						<a th:href="@{/users/config(username=${user.username})}" class="fa fa-user-cog"></a>
+						<a th:href="@{/users/delete(username=${user.username})}" class="fa fa-user-minus"></a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="pop-alert hidden" id="pop-alert">
+		<p id="pop-msg"></p>
+	</div>
+	<style>
+		.table-div{
+			width: 60%;
+			margin: 20%;
+			margin-top: 2%;
+		}
+		.table {border: 3px solid #000; font-size: 1.25rem;}
+		.pop-alert {
+			text-align: center;
+			display: block;
+			color: #ffffff;
+			background: rgba(0, 0, 0, 0.7);
+			padding: 1.25rem;
+			margin: 1rem;
+			border-radius: 12px;
+			box-shadow: 0 10px 15px rgba(0, 0, 0, 0.65);
+			backdrop-filter: blur(4px);
+			position: absolute;
+			top: 5%;
+			right: 3%;
+			font-size: 1.2rem;
+		}
+		.hidden {display: none;}
+		td a {
+			font-size: 1.75rem;
+            color: #000;
+            text-decoration: none;
+            text-align: center;
+		}
+        .fa-user-cog{position: relative; right: 1rem;}
+        .fa-user-minus{position: relative; left: 1.5rem;}
+		.fa-user-minus:hover {
+			cursor: pointer;
+			color: #ff2525;
+		}
+		.fa-user-cog:hover {
+			cursor: pointer;
+			color: #777;
+		}
+		header {
+            display: flex;
+            justify-content: space-between;
+            padding: 2.5%;
+            padding-top: 1%;
+        }
+        header a {
+        	color: #000;
+        	text-decoration: none;
+        	font-size: 2.5rem;
+        	cursor: pointer;
+        }
+        header a:hover {
+        	color: #434343;
+        }
+        body.dark header a{color: #fff;}
+        body.dark header a:hover{color: #bbb;}
+	</style>
+	<script>
+		const pop_alert = document.getElementById('pop-alert');
+		const pop_msg = document.getElementById('pop-msg');
+		function popAlert(msg, autoClose) {
+			pop_msg.innerHTML = msg;
+			pop_alert.classList.remove('hidden');
+			document.addEventListener('mouseup', (e)=>{
+				if (!pop_alert.contains(e.target) && !pop_alert.classList.contains('hidden')) {
+						pop_alert.classList.add('hidden');
+				}
+			});
+		}
+		var user_info = document.getElementsByClassName('user_info');
+		for (var i = 0; i < user_info.length; i++) {
+			user_info[i].addEventListener("click", function() {
+				document.execCommand("copy");
+				this.addEventListener('copy', function(e){
+					e.preventDefault();
+					if (e.clipboardData) {
+						e.clipboardData.setData("text/plain", this.innerHTML);
+					}
+				})
+				popAlert('Copied text to clipboard', true);
+				setTimeout(function(){
+                    pop_alert.classList.add('hidden');
+                }, 4000);
+			});
+		}
+		var user_config = document.getElementsByClassName('fa-user-cog');
+		var user_delete = document.getElementsByClassName('fa-user-minus');
+		for (var i = 0; i < user_config.length; i++) {
+			user_config[i].addEventListener("click", function(e) {
+				if (!this.classList.contains('ready')) {
+					e.preventDefault();
+					Swal.fire({
+					  	title: "Are you sure you want to modify this user's credentials?",
+				  		icon: 'warning',
+				  		showCancelButton: true,
+				  		confirmButtonColor: '#3085d6',
+				  		cancelButtonColor: '#d33',
+				  		confirmButtonText: "I'm sure"
+					}).then((result) => {
+					  	if (result.isConfirmed) {
+					  		this.classList.add('ready');
+	                        this.click();
+				 		}
+					})
+				}
+			});
+		}
+		for (var i = 0; i < user_delete.length; i++) {
+			user_delete[i].addEventListener("click", function(e) {
+				if (!this.classList.contains('ready')) {
+					e.preventDefault();
+					Swal.fire({
+					  	title: "Are you sure you want to modify this user's credentials?",
+				  		icon: 'warning',
+				  		showCancelButton: true,
+				  		confirmButtonColor: '#3085d6',
+				  		cancelButtonColor: '#d33',
+				  		confirmButtonText: "I'm sure"
+					}).then((result) => {
+					  	if (result.isConfirmed) {
+					  		this.classList.add('ready');
+	                        this.click();
+				 		}
+					})
+				}
+			});
+		}
+	</script>
+</body>
+</html>
