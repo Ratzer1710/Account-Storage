@@ -2,9 +2,11 @@
 A service to store information about your accounts locally built with JAVA Spring Boot using JPA, Spring Security and Thymeleaf.
 
 # How to run
-- Install MySQL at https://dev.mysql.com/downloads/installer/
+- Install MySQL at https://dev.mysql.com/downloads/installer/ during installation make sure to download MySQL Workbench 
 - Create your MySQL username and password
-- Create a MySQL database
+- Open MySQL Workbench and acces your local instance
+![image](https://user-images.githubusercontent.com/75636359/215791019-2e405e6b-54c5-40c5-8ba8-677a172abf23.png)
+- 
 - Locate accountStorage-0.0.1-SNAPSHOT.jar in accountStorage/target
 - Open accountStorage-0.0.1-SNAPSHOT.jar with winzip or winrar and go to BOOT-INF/classes/application.properties
 - Open application.properties with a text editor
