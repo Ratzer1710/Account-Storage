@@ -1,0 +1,71 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/schema.json",
+  "build": {
+    "beforeBuildCommand": "ng build --configuration production",
+    "beforeDevCommand": "ng serve",
+    "devPath": "http://localhost:4200",
+    "distDir": "../dist/account-manager-webapp/browser"
+  },
+  "package": {
+    "productName": "Account Manager",
+    "version": "1.0.0"
+  },
+  "tauri": {
+    "systemTray": {
+      "iconPath": "icons/logo 128x128.png",
+      "iconAsTemplate": true,
+      "menuOnLeftClick": true
+    },
+    "allowlist": {
+      "all": false,
+      "http": {
+        "all": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "category": "DeveloperTool",
+      "deb": {
+        "depends": []
+      },
+      "externalBin": [],
+      "icon": [
+        "icons/logo 32x32.png",
+        "icons/logo 128x128.png",
+        "icons/logo 256x256.png",
+        "icons/logo.icns",
+        "icons/logo.ico"
+      ],
+      "resources": ["data/accounts.json", "data/config.json"],
+      "identifier": "com.account-manager.app",
+      "longDescription": "",
+      "shortDescription": "",
+      "targets": "nsis",
+      "windows": {
+        "nsis": {
+          "installerIcon": "icons/logo.ico",
+          "installMode": "currentUser",
+          "languages": ["English", "Spanish"],
+          "displayLanguageSelector": true
+        }
+      }
+    },
+    "security": {
+      "csp": null
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "title": "Account Manager",
+        "fullscreen": false,
+        "resizable": true,
+        "height": 600,
+        "width": 800,
+        "minHeight": 600,
+        "minWidth": 800
+      }
+    ]
+  }
+}

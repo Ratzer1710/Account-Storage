@@ -1,0 +1,58 @@
+{
+    "configuration": {
+        "title": "Configuration",
+        "password": {
+            "label": "Access Password",
+            "currentPassword": "Current access password",
+            "newPassword": "New password",
+            "confirmPassword": "Confirm password",
+            "lengthError": "The password must have at least 8 characters.",
+            "lowercaseError": "The password must have at least one uppercase letter.",
+            "uppercaseError": "The password must have at least one lowercase letter.",
+            "numberError": "The password must have at least one number.",
+            "noMatchError": "The passwords provided do not match.",
+            "currentPasswordError": "The current password provided is incorrect."
+        },
+        "language": {
+            "label": "Language",
+            "es": "Spanish",
+            "en": "English"
+        },
+        "theme": {
+            "label": "Theme",
+            "dark": "Dark",
+            "light": "Light"
+        }
+    },
+    "login": {
+        "title": "Login",
+        "wrongPassword": "The password you entered is incorrect. Please try again.",
+        "label":"Enter your password"
+    },
+    "accounts": {
+        "title": "Accounts",
+        "platform": "Platform",
+        "username": "Username",
+        "password": "Password",
+        "actions": "Actions"
+    },
+    "actions": {
+        "close": "Close",
+        "cancel": "Cancel",
+        "save": "Save",
+        "copyUsername": "Copy Username",
+        "copyPassword": "Copy Password",
+        "editAccount": "Edit Account",
+        "deleteAccount": "Delete Account",
+        "addAccount": "Add Account",
+        "export": "Export Accounts",
+        "add": "Add",
+        "edit": "Edit",
+        "delete": "Delete",
+        "next": "Next",
+        "prev": "Prev",
+        "deleteMessage": "Are you sure you want to remove this account?",
+        "changePassword": "Change access password",
+        "new": "New"
+    }
+}

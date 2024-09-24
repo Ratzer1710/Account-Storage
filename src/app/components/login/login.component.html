@@ -1,0 +1,8 @@
+<form (ngSubmit)="onLogin()" class="basic-form">
+    <p [ngClass]="{ hidden: !showError }" class="form-error" *ngIf="showError">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        {{ 'login.wrongPassword' | translate }}
+    </p>
+    <input autocomplete="off" autofocus type="password" [(ngModel)]="password" [placeholder]="'login.label' | translate" [ngModelOptions]="{standalone: true}">
+    <button type="submit">{{ 'login.title' | translate }}</button>
+</form>

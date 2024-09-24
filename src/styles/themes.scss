@@ -1,0 +1,29 @@
+@mixin light-theme {
+    --background: #FFFFFF;
+    --background-alt: #F0F0F0;
+    --background-hidden: #FFFFFFBF;
+    --border: #D8D8D8;
+    --hover: #DDDDDD;
+    --text: #4B4B4B;
+    --text-accent: #000000;
+    --primary: #00821C;
+    --secondary: #60DC7D;
+    --warning: #f0C800;
+    --error: #D44500;
+    --error-background: #FF0000;
+}
+
+@mixin dark-theme {
+    --background: #141414;
+    --background-alt: #1c1c1c;
+    --background-hidden: #000000BF;
+    --border: #404040;
+    --hover: #323940;
+    --text: #D8D8D8;
+    --text-accent: #FFFFFF;
+    --primary: #60DC7D;
+    --secondary: #00821C;
+    --warning: #FFFF00;
+    --error: #FF4040;
+    --error-background: #B60000;
+}

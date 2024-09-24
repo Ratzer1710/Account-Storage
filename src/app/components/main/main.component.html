@@ -1,0 +1,76 @@
+<app-header (onConfig)="onConfig()"></app-header>
+<div class="delete-alert-container" *ngIf="showDeleteMessage" [ngClass]="{'show' : deleteMessageAlertTrigger}">
+  <div class="delete-alert">
+    <span>{{ 'actions.deleteMessage' | translate }}</span>
+    <div class="button-group">
+      <button (click)="onCancel()">{{ 'actions.cancel' | translate }}</button>
+      <button (click)="onConfirmDelete()" class="delete-btn">{{ 'actions.delete' | translate }}</button>
+    </div>
+  </div>
+</div>
+<div class="accounts-container">
+  <div class="table">
+    <div class="accounts-header">
+      <span class="platform-header title">{{ "accounts.platform" | translate }}</span>
+      <span class="username-header title">{{ "accounts.username" | translate }}</span>
+      <span class="password-header title">{{ "accounts.password" | translate }}</span>
+      <span class="actions-header title">{{ "accounts.actions" | translate }}</span>
+    </div>
+    <div class="row" *ngFor="let account of pagedAccounts">
+      <div class="account-item platform">
+        <span>{{ account.platform }}</span>
+        <i [ngClass]="getPlatformIcon(account.platform)"></i>
+      </div>
+      <div class="account-item username">
+        <span>{{ account.username }}</span>
+        <button (click)="onCopy(account.username, $event)"><i class="fa-regular fa-copy"></i></button>
+      </div>
+      <div class="account-item password">
+        <span>{{ getPassword(account.password) }}</span>
+        <button (click)="onCopy(account.password, $event)"><i class="fa-regular fa-copy"></i></button>
+      </div>
+      <div class="actions">
+        <button [title]="'actions.editAccount' | translate" (click)="onEditAccount(account.id)"><i class="fa-solid fa-pen-to-square"></i></button>
+        <button [title]="'actions.deleteAccount' | translate" (click)="onDeleteAccount(account.id)"><i class="fa-solid fa-trash"></i></button>
+      </div>
+    </div>
+    <div class="row" *ngFor="let row of emptyRows">
+      <span>&nbsp;</span>
+      <span>&nbsp;</span>
+      <span>&nbsp;</span>
+      <span>&nbsp;</span>
+    </div>
+  </div>
+  <div class="accounts-footer">
+    <div class="pagination">
+      <button (click)="onNavigatePage(currentPage - 1)" [ngClass]="{ 'disabled': currentPage < 2}"><i class="fa-solid fa-angle-left"></i></button>
+      <ng-container id="first-pagination-btn" *ngIf="totalPages > 0">
+        <button *ngIf="currentPage !== 1 && currentPage !== totalPages" (click)="onNavigatePage(currentPage - 1)">{{ currentPage - 1 }}</button>
+        <button *ngIf="currentPage !== 1 && currentPage === totalPages" (click)="onNavigatePage(currentPage - 2)">{{ currentPage - 2 }}</button>
+        <button *ngIf="currentPage === 1" class="active" (click)="onNavigatePage(1)">{{ 1 }}</button>
+      </ng-container>
+      <ng-container id="second-pagination-btn" *ngIf="totalPages > 1">
+        <button *ngIf="currentPage !== 1 && currentPage !== totalPages" (click)="onNavigatePage(currentPage)" class="active">{{ currentPage }}</button>
+        <button *ngIf="currentPage === 1" (click)="onNavigatePage(currentPage + 1)">{{ currentPage + 1 }}</button>
+        <button *ngIf="currentPage === totalPages" (click)="onNavigatePage(currentPage - 1)">{{ currentPage - 1 }}</button>
+      </ng-container>
+      <ng-container id="third-pagination-btn" *ngIf="totalPages > 2">
+        <button *ngIf="currentPage !== 1 && currentPage !== totalPages" (click)="onNavigatePage(currentPage + 1)">{{ currentPage + 1 }}</button>
+        <button *ngIf="currentPage !== 1 && currentPage === totalPages" class="active" (click)="onNavigatePage(totalPages)">{{ totalPages }}</button>
+        <button *ngIf="currentPage === 1" (click)="onNavigatePage(currentPage + 2)">{{ currentPage + 2 }}</button>
+      </ng-container>
+      <button (click)="onNavigatePage(currentPage + 1)" [ngClass]="{ 'disabled': currentPage === totalPages || totalPages < 1}"><i class="fa-solid fa-angle-right"></i></button>
+    </div>
+    <div class="controls">
+      <button (click)="onExport()">
+        {{ "actions.export" | translate }}
+        <i class="fa-solid fa-upload"></i>
+      </button>
+      <button (click)="onAddAccount()">
+        {{ "actions.addAccount" | translate }}
+        <i class="fa-solid fa-plus"></i>
+      </button>
+    </div>
+  </div>
+</div>
+<app-configuration *ngIf="showConfiguration" [showConfig]="showConfigurationTrigger" (closeConfig)="onExitConfig()"></app-configuration>

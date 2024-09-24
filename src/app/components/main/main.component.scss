@@ -1,0 +1,181 @@
+.accounts-container {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+}
+
+.table {
+    border: 2px solid var(--primary);
+    border-radius: 15px;
+    overflow: hidden;
+    background: var(--background-alt);
+
+    .row {
+        width: 100%;
+        display: flex;
+        gap: 10px;
+        padding: 20px;
+        color: var(--text);
+
+        &:nth-child(odd) {
+            background: var(--background);
+        }
+
+        .account-item {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            max-width: 100%;
+            overflow: hidden;
+
+            span {
+                max-width: 75%;
+                overflow: auto;
+                white-space: nowrap;
+                overflow-x: scroll;
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+
+                &::-webkit-scrollbar {
+                    display: none;
+                }
+            }
+        }
+
+        .platform i, .username button, .password button {
+            padding: 0 15px;
+            border-left: 2px solid var(--primary);
+            z-index: 1000;
+        }
+
+        .platform i {
+            width: 45px;
+        }
+
+        .username button, .password button {
+            color: var(--text);
+
+            &:hover {
+                color: var(--primary);
+            }
+
+            i {
+                transition: color 0.3s ease-in-out;
+            }
+
+            i.active {
+                color: var(--secondary);
+            }
+        }
+    }
+
+    .actions-header {
+        text-align: center;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        gap: 25%;
+
+        button {
+            color: var(--secondary);
+        
+            &:hover {
+                color: var(--primary);
+            }
+
+            i {
+                font-size: 16px;
+            }
+        }
+    }
+}
+
+.accounts-header {
+    background: var(--secondary);
+    width: 100%;
+    display: flex;
+    padding: 20px;
+}
+
+.platform, .platform-header {
+    width: 25%;
+}
+
+.username, .username-header {
+    width: 40%;
+}
+
+.password, .password-header {
+    width: 25%;
+}
+
+.actions, .actions-header {
+    width: 10%;
+}
+
+.accounts-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+
+    .pagination {
+        border: 2px solid var(--primary);
+        border-radius: 10px;
+        background: var(--background-alt);
+        overflow: hidden;
+
+        button {
+            width: 50px;
+            height: 45px;
+            font-size: 20px;
+            color: var(--text);
+
+            &:hover {
+                background: var(--hover);
+                color: var(--text-accent);
+            }
+
+            &.active {
+                background: var(--secondary);
+                color: var(--text-accent);
+            }
+
+            i {
+                position: relative;
+                bottom: 1.5px;
+            }
+        }
+    }
+
+    .controls {
+        display: flex;
+        align-items: center;
+        gap: 25px;
+
+        button {
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            padding: 10px 20px;
+            color: var(--text-accent);
+
+            &:hover {
+                background: var(--secondary);
+
+                i {
+                    border-color: var(--text-accent);
+                }
+            }
+
+            i {
+                border-left: 2px solid var(--primary);
+                padding: 5px 0 5px 10px;
+                margin-left: 10px;
+                transition: all 0.3s ease-in-out;
+            }
+        }
+    }
+}

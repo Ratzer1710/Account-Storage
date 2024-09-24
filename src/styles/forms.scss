@@ -1,0 +1,119 @@
+.basic-form {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 5vh;
+  justify-content: center;
+  align-items: center;
+
+  input {
+    width: 75%;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 18px;
+    background: var(--background-alt);
+    color: var(--text-accent);
+
+    &:focus {
+      color: var(--text-accent);
+      border-color: var(--text-accent);
+    }
+  }
+
+  button {
+    width: 25%;
+    border: 2px solid var(--text);
+    border-radius: 10px;
+    padding: 10px;
+    background: var(--background-alt);
+    color: var(--text);
+    font-size: 18px;
+
+    &:hover {
+      background: var(--hover);
+      color: var(--text-accent);
+      border-color: var(--text-accent);
+    }
+  }
+
+  .form-error {
+    color: var(--error);
+    margin-bottom: -2.5vh;
+    transition: opacity 0.3s ease-in-out;
+  }
+}
+
+.form {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 5vh;
+  justify-content: center;
+  padding: 0 25%;
+
+  input {
+    width: 100%;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 18px;
+    background: var(--background-alt);
+    color: var(--text-accent);
+
+    &:focus {
+      border-color: var(--primary);
+
+      + label {
+        bottom: 95px;
+        color: var(--primary);
+      }
+    }
+
+    &:not(:placeholder-shown) {
+      border-color: var(--primary);
+
+      + label {
+        bottom: 95px;
+        color: var(--primary);
+      }
+    }
+  }
+
+  label {
+    color: var(--text);
+    font-size: 18px;
+    position: relative;
+    left: 20px;
+    bottom: 45px;
+    pointer-events: none;
+    transition: all 0.5s ease;
+  }
+
+  button {
+    width: 30%;
+    border: 2px solid var(--text);
+    border-radius: 10px;
+    padding: 10px;
+    margin-right: 30px;
+    background: var(--background-alt);
+    color: var(--text);
+    font-size: 18px;
+
+    &:hover {
+      background: var(--hover);
+      color: var(--text-accent);
+      border-color: var(--text-accent);
+    }
+  }
+
+  .success-btn {
+    border-color: var(--primary);
+    color: var(--primary);
+
+    &:hover {
+        border-color: var(--primary);
+        color: var(--text-accent);
+        background-color: var(--secondary);
+    }
+  }
+}

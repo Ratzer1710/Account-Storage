@@ -1,0 +1,53 @@
+<div class="config-container">
+  <div class="config" [ngClass]="{ show: showConfig }">
+    <div class="config-header">
+        <i class="fa-solid fa-gear"></i>
+        <h1>{{ 'configuration.title' | translate }}</h1>
+        <button class="close-btn" [title]="'actions.close' | translate" (click)="onClose()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="dual-config-group">
+      <div class="config-group">
+          <label for="theme">{{ 'configuration.theme.label' | translate }}:</label>
+          <div #themeSelect class="select" [ngClass]="{expanded: showThemeSelect}">
+              <div class="select-box" (click)="onToggleThemeSelect()">
+                <span class="selected">{{ 'configuration.theme.' + activeTheme | translate}}</span>
+                <button class="arrow"><i class="fa-solid fa-chevron-down"></i></button>
+              </div>
+              <ul class="options">
+                <li class="option" (click)="onSelectTheme('dark')">{{ 'configuration.theme.dark' | translate }}</li>
+                <li class="option" (click)="onSelectTheme('light')">{{ 'configuration.theme.light' | translate }}</li>
+              </ul>
+            </div>
+      </div>
+      <div class="config-group">
+          <label for="language">{{ 'configuration.language.label' | translate }}:</label>
+          <div #langSelect class="select" [ngClass]="{expanded: showLangSelect}">
+              <div class="select-box" (click)="onToggleLangSelect()">
+                <span class="selected">{{ 'configuration.language.' + activeLang | translate}}</span>
+                <button class="arrow"><i class="fa-solid fa-chevron-down"></i></button>
+              </div>
+              <ul class="options">
+                <li class="option" (click)="onSelectLang('en')">{{ 'configuration.language.en' | translate }}</li>
+                <li class="option" (click)="onSelectLang('es')">{{ 'configuration.language.es' | translate }}</li>
+              </ul>
+            </div>
+      </div>
+    </div>
+    <div class="config-group">
+        <label>{{ 'actions.changePassword' | translate }}</label>
+          <input autocomplete="off" type="password" class="password" name="access-password" [placeholder]="'configuration.password.currentPassword' | translate" [(ngModel)]="password">
+          <div class="password-group">
+          <input autocomplete="off" type="password" class="new-password" name="new-password" [placeholder]="'configuration.password.newPassword' | translate" [(ngModel)]="newPassword">
+          <input autocomplete="off" type="password" class="confirm-password" name="confirm-password" [placeholder]="'configuration.password.confirmPassword' | translate" [(ngModel)]="confirmPassword">
+        </div>
+        <p [ngClass]="{ show: showPasswordError }" class="password-error">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          {{ passwordError | translate }}
+      </p>
+    </div>
+    <div class="config-btn-group">
+        <button (click)="onClose()">{{ 'actions.cancel' | translate }}</button>
+        <button (click)="onSave()" class="save-btn">{{ 'actions.save' | translate }}</button>
+    </div>
+  </div>
+</div>

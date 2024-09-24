@@ -1,0 +1,58 @@
+{
+    "configuration": {
+        "title": "Configuración",
+        "password": {
+            "label": "Contraseña",
+            "currentPassword": "Contraseña actual",
+            "newPassword": "Nueva contraseña",
+            "confirmPassword": "Confirmar contraseña",
+            "lengthError": "La contraseña debe tener al menos 8 caracteres.",
+            "lowercaseError": "La contraseña debe tener al menos una letra minúscula.",
+            "uppercaseError": "La contraseña debe tener al menos una letra mayúscula.",
+            "numberError": "La contraseña debe tener al menos un número.",
+            "noMatchError": "Las contraseñas no coinciden.",
+            "currentPasswordError": "La contraseña actual es incorrecta."
+        },
+        "language": {
+            "label": "Idioma",
+            "es": "Español",
+            "en": "Inglés"
+        },
+        "theme": {
+            "label": "Tema",
+            "dark": "Oscuro",
+            "light": "Claro"
+        }
+    },
+    "login": {
+        "title": "Iniciar Sesión",
+        "wrongPassword": "La contraseña ingresada es incorrecta. Intente nuevamente.",
+        "label":"Ingrese su contraseña"
+    },
+    "accounts": {
+        "title": "Cuentas",
+        "platform": "Plataforma",
+        "username": "Nombre de Usuario",
+        "password": "Contraseña",
+        "actions": "Acciones"
+    },
+    "actions": {
+        "close": "Cerrar",
+        "cancel": "Cancelar",
+        "save": "Guardar",
+        "copyUsername": "Copiar Nombre de Usuario",
+        "copyPassword": "Copiar Contraseña",
+        "editAccount": "Editar Cuenta",
+        "deleteAccount": "Eliminar Cuenta",
+        "addAccount": "Añadir Cuenta",
+        "export": "Exportar Cuentas",
+        "add": "Añadir",
+        "edit": "Editar",
+        "delete": "Eliminar",
+        "next": "Siguiente",
+        "prev": "Anterior",
+        "deleteMessage": "¿Estás seguro de que deseas eliminar esta cuenta?",
+        "changePassword": "Cambiar contraseña",
+        "new": "Nueva"
+    }
+}

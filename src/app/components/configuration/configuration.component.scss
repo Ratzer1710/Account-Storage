@@ -1,0 +1,213 @@
+.config-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--background-hidden);
+  overflow: hidden;
+  z-index: 2000;
+}
+
+.config-header {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 15px;
+
+  h1,
+  i {
+    font-size: 24px;
+    color: var(--text);
+    transition: all 0.25s ease-in-out;
+  }
+
+  .close-btn:hover i {
+    color: var(--error);
+  }
+}
+
+.config {
+  width: 75%;
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--background-alt);
+  border: 2px solid var(--text);
+  border-radius: 10px;
+  padding: 50px;
+  text-align: center;
+  transition: all 0.5s ease-in-out;
+
+  &.show {
+    top: 50% !important;
+  }
+}
+
+.dual-config-group {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  .config-group {
+    flex-direction: row;
+    align-items: center;
+
+    label {
+      margin-right: 15px;
+    }
+  }
+}
+
+.config-group {
+  width: 100%;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  label {
+    margin: 10px 0;
+    font-size: 20px;
+    color: var(--text);
+  }
+
+  input,
+  select {
+    font-size: 16px;
+  }
+
+  input {
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+    color: var(--text);
+
+    &:focus {
+      border-color: var(--text);
+    }
+  }
+
+  .password-error {
+    position: relative;
+    color: var(--error);
+    width: 100%;
+    text-wrap: nowrap;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+    opacity: 0;
+
+    &.show {
+      opacity: 1;
+    }
+  }
+
+  .password-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0;
+    gap: 10px;
+  }
+}
+
+.select {
+  border-radius: 10px;
+  border: 2px solid var(--border);
+  border-collapse: collapse;
+  background-color: var(--background);
+  color: var(--text);
+  width: 125px;
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+
+  .select-box {
+    padding: 5px 10px;
+    cursor: pointer;
+
+    .arrow {
+      padding-left: 10px;
+      float: right;
+      color: var(--text);
+
+      i {
+        transition: all 0.3s ease-in-out;
+      }
+    }
+  }
+
+  &.expanded {
+    border-radius: 10px 10px 0 0;
+
+    .select-box .arrow i {
+      transform: rotate(180deg);
+    }
+
+    .options {
+      max-height: 100px;
+      opacity: 1;
+    }
+  }
+
+  .options {
+    position: absolute;
+    list-style: none;
+    text-align: left;
+    border-collapse: collapse;
+    max-height: 0px;
+    overflow: hidden;
+    background-color: var(--background);
+    width: 125px;
+    border-radius: 0 0 10px 10px;
+    border-collapse: collapse;
+    margin-left: -2px;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    border: 2px solid var(--border);
+    overflow: hidden;
+    opacity: 0;
+
+    .option {
+      padding: 5px 10px;
+      cursor: pointer;
+      &:hover {
+        background-color: var(--background-alt);
+      }
+    }
+  }
+}
+
+.config-btn-group {
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+
+  button {
+    width: 100%;
+    border: 2px solid var(--text);
+    border-radius: 10px;
+    padding: 10px;
+    background: var(--background-alt);
+    color: var(--text);
+    font-size: 16px;
+
+    &:hover {
+      background: var(--hover);
+      color: var(--text-accent);
+      border-color: var(--text-accent);
+    }
+  }
+
+  .save-btn {
+    border-color: var(--primary);
+    color: var(--primary);
+
+    &:hover {
+        background-color: var(--secondary);
+        color: var(--text-accent);
+    }
+  }
+}

@@ -1,0 +1,67 @@
+.delete-alert-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--background-hidden);
+  overflow: hidden;
+  z-index: 2000;
+
+  &.show .delete-alert {
+    top: 50% !important;
+  }
+}
+
+.delete-alert {
+  width: 75%;
+  position: absolute;
+  top: -15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--background-alt);
+  border: 2px solid var(--text);
+  border-radius: 10px;
+  padding: 50px;
+  text-align: center;
+  transition: all 0.5s ease-in-out;
+
+  span {
+    color: var(--text-accent);
+    font-size: 30px;
+  }
+
+  .button-group {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 50px;
+
+    button {
+      width: 30%;
+      border: 2px solid var(--text);
+      border-radius: 10px;
+      padding: 5px;
+      background: var(--background-alt);
+      color: var(--text);
+      font-size: 20px;
+
+      &:hover {
+        background: var(--hover);
+        color: var(--text-accent);
+        border-color: var(--text-accent);
+      }
+    }
+
+    .delete-btn {
+        border-color: var(--error);
+        color: var(--error);
+
+        &:hover {
+            color: var(--text-accent);
+            background-color: var(--error-background);
+        }
+    }
+  }
+}
