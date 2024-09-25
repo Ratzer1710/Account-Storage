@@ -184,6 +184,11 @@ fn main() {
             }
             _ => {}
         })
+        .setup(|app| {
+            let window = app.get_window("main").unwrap();
+            window.hide().unwrap();
+            Ok(())
+        })
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
